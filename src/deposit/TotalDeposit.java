@@ -293,19 +293,6 @@ public class TotalDeposit {
 					default:
 						return 0.00;	
 				}
-			case CLOTHING:
-				switch (order.getShipmentType()){
-					case DOMESTIC:
-						return 3.99;
-					case DOMESTIC_EXPEDITED:
-						return 6.99;
-					case INTERNATIONAL:
-						return 16.95;
-					case INTERNATIONAL_EXPEDITED:
-						return 46.50;
-					default:
-						return 0.00;
-				}
 			case MUSIC:
 				switch (order.getShipmentType()){
 					case DOMESTIC:
@@ -353,7 +340,7 @@ public class TotalDeposit {
 			case CLOTHING:
 				return 6.99;
 			case ELECTRONICS:
-				return 10.99;
+				return 11.99;
 			case FURNITUREDECOR:
 				return 24.99;
 			case JEWELRY:
