@@ -114,7 +114,7 @@ public class TestPairsTotalDeposit {
         order.setShipment(ShipmentType.INTERNATIONAL);
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 16.45) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 15.46) < 1e-2);
     }
     @Test
     public void test_10() {
@@ -125,7 +125,7 @@ public class TestPairsTotalDeposit {
         order.setShipment(ShipmentType.INTERNATIONAL_EXPEDITED);
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 72.34) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 71.35) < 1e-2);
     }
     @Test
     public void test_11() {
@@ -136,7 +136,7 @@ public class TestPairsTotalDeposit {
         order.setShipment(ShipmentType.DOMESTIC);
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 16.03) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 15.04) < 1e-2);
     }
     @Test
     public void test_12() {
@@ -147,7 +147,7 @@ public class TestPairsTotalDeposit {
         order.setShipment(ShipmentType.DOMESTIC_EXPEDITED);
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 5.84) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 4.85) < 1e-2);
     }
     @Test
     public void test_13() {
@@ -158,7 +158,7 @@ public class TestPairsTotalDeposit {
         order.setShipment(ShipmentType.INTERNATIONAL);
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 23) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 22.01) < 1e-2);
     }
     @Test
     public void test_14() {
@@ -169,7 +169,7 @@ public class TestPairsTotalDeposit {
         order.setShipment(ShipmentType.DOMESTIC);
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 4.84) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 3.85) < 1e-2);
     }
     @Test
     public void test_15() {
@@ -180,7 +180,7 @@ public class TestPairsTotalDeposit {
         order.setShipment(ShipmentType.DOMESTIC);
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 3.49) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 2.5) < 1e-2);
     }
     @Test
     public void test_16() {
@@ -191,7 +191,7 @@ public class TestPairsTotalDeposit {
         order.setShipment(ShipmentType.DOMESTIC_EXPEDITED);
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 4.84) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 3.85) < 1e-2);
     }
     @Test
     public void test_17() {

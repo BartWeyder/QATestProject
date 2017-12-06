@@ -41,7 +41,6 @@ public class TotalDeposit {
 	
 	//limits for free shipping
 	private final double FREE_SHIPPING_BOOK_LIMIT = 25.0;
-	private final double FREE_SHIPPING_ELECTRONICS_LIMIT = 99.0;
 	private final double FREE_SHIPPING_LIMIT = 49.0;
 	
 	//some constants for jewelry sales
@@ -159,7 +158,7 @@ public class TotalDeposit {
 							order.getShipmentType());
 			
 			//subtract per-item fee
-			if (orderItem.getPrice() >= PER_ITEM_FEE){
+			if (orderItem.getPrice() >= PER_ITEM_FEE + 0.01){
 				totalDeposit -= orderItem.getQuantity() * PER_ITEM_FEE;
 			}
 		}
@@ -213,7 +212,11 @@ public class TotalDeposit {
 	 */
 	private boolean isEligibleForFreeShipping(){
 		double totalPriceInType = 0.0;
-		
+
+		if (order.getShipmentType() == ShipmentType.INTERNATIONAL
+				|| order.getShipmentType() == ShipmentType.INTERNATIONAL_EXPEDITED)
+			return false;
+
 		for (ProductType productType:ProductType.values()){
 			//calculate the total price in this category
 			for (OrderItem orderItem:order.getOrderItems()){
@@ -223,13 +226,11 @@ public class TotalDeposit {
 			}
 			
 			//check the eligibility conditions
+			if (productType == ProductType.FURNITUREDECOR)
+				return false;
+
 			if (productType == ProductType.BOOKS){
-				if (totalPriceInType > FREE_SHIPPING_BOOK_LIMIT){
-					return true;
-				}
-			}
-			else if (productType == ProductType.ELECTRONICS){
-				if (totalPriceInType > FREE_SHIPPING_ELECTRONICS_LIMIT){
+				if (totalPriceInType >= FREE_SHIPPING_BOOK_LIMIT){
 					return true;
 				}
 			}
@@ -294,18 +295,6 @@ public class TotalDeposit {
 						return 0.00;	
 				}
 			case MUSIC:
-				switch (order.getShipmentType()){
-					case DOMESTIC:
-						return 3.99;
-					case DOMESTIC_EXPEDITED:
-						return 6.99;
-					case INTERNATIONAL:
-						return 14.95;
-					case INTERNATIONAL_EXPEDITED:
-						return 46.50;
-					default:
-						return 0.00;
-				}
 			case VIDEO:
 				switch (order.getShipmentType()){
 					case DOMESTIC:
@@ -405,6 +394,8 @@ public class TotalDeposit {
 				return 1.35;
 			case VIDEO:
 				return 1.35;
+			case MUSIC:
+				return 0;
 			default:
 				switch (shipmentType){
 					case DOMESTIC:
