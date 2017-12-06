@@ -17,7 +17,7 @@ public class TestTotalDeposit {
 
 	@Test
 	public void test() {
-		calendar.set(2017, 12, 17);
+		calendar.set(2017, 11, 17);
 
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.JEWELRY,
@@ -40,7 +40,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_1() {
-		calendar.set(2018, 3, 30);
+		calendar.set(2018, 2, 30);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.CLOTHING, 1, 0.5, false));
 		order.setDate(calendar.getTime());
@@ -51,7 +51,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_2() {
-		calendar.set(2018, 9, 30);
+		calendar.set(2018, 8, 30);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.ELECTRONICS, 1, 1, true));
 		order.setDate(calendar.getTime());
@@ -62,7 +62,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_3() {
-		calendar.set(2018, 1, 15);
+		calendar.set(2018, 0, 15);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.FURNITUREDECOR, 1, 6.67, false));
 		order.setDate(calendar.getTime());
@@ -73,7 +73,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_4() {
-		calendar.set(2018, 10, 1);
+		calendar.set(2018, 9, 1);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.JEWELRY, 1, 10, false));
 		order.setDate(calendar.getTime());
@@ -84,7 +84,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_5() {
-		calendar.set(2018, 1, 17);
+		calendar.set(2018, 0, 17);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.MUSIC, 1, 12.5, false));
 		order.setDate(calendar.getTime());
@@ -95,7 +95,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_6() {
-		calendar.set(2018, 1, 16);
+		calendar.set(2018, 0, 16);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.VIDEO, 1, 13.33, false));
 		order.setDate(calendar.getTime());
@@ -106,7 +106,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_7() {
-		calendar.set(2018, 10, 01);
+		calendar.set(2018, 9, 01);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.WATCHES, 1, 25, false));
 		order.setDate(calendar.getTime());
@@ -117,7 +117,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_8() {
-		calendar.set(2018, 1, 17);
+		calendar.set(2018, 0, 17);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.BOOKS, 1, 49, false));
 		order.setDate(calendar.getTime());
@@ -128,7 +128,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_9() {
-		calendar.set(2018, 9, 30);
+		calendar.set(2018, 8, 30);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.ELECTRONICS, 1, 200, true));
 		order.setDate(calendar.getTime());
@@ -139,7 +139,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_10() {
-		calendar.set(2018, 1, 17);
+		calendar.set(2018, 0, 17);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.JEWELRY, 1, 500, false));
 		order.setDate(calendar.getTime());
@@ -150,7 +150,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_11() {
-		calendar.set(2018, 9, 30);
+		calendar.set(2018, 8, 30);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.ELECTRONICS, 1, 800, true));
 		order.setDate(calendar.getTime());
@@ -161,7 +161,7 @@ public class TestTotalDeposit {
 	}
 	@Test
 	public void test_12() {
-		calendar.set(2018, 1, 15);
+		calendar.set(2018, 0, 15);
 		Order order = new Order();
 		order.addOrderItem(new OrderItem(ProductType.VIDEO, 1, 801, false));
 		order.setDate(calendar.getTime());

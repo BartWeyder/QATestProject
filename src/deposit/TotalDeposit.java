@@ -51,16 +51,16 @@ public class TotalDeposit {
 		this.order = new Order(order);
 		
 		//set dates
-		calendar.set(2017, 12, 16);
+		calendar.set(2017, Calendar.DECEMBER, 16);
 		jewelrySalesStartDate = calendar.getTime();
 		
-		calendar.set(2018, 3, 30);
+		calendar.set(2018, Calendar.MARCH, 30);
 		jewelrySalesEndDate = calendar.getTime();
 		
-		calendar.set(2018, 1, 16);
+		calendar.set(2018, Calendar.JANUARY, 16);
 		watchReferralStartDate = calendar.getTime();
 		
-		calendar.set(2018, 9, 30);
+		calendar.set(2018, Calendar.SEPTEMBER, 30);
 		watchReferralEndDate = calendar.getTime();
 	}
 	
@@ -192,9 +192,9 @@ public class TotalDeposit {
 			else{
 				totalDeposit +=
 						WATCH_REFERRAL_LIMIT1
-							* (1.0 - WATCH_REFERRAL_RATE2) +
-						(totalWatchPrice - WATCH_REFERRAL_LIMIT1)
 							* (1.0 - WATCH_REFERRAL_RATE1) +
+						(WATCH_REFERRAL_LIMIT2 - WATCH_REFERRAL_LIMIT1)
+							* (1.0 - WATCH_REFERRAL_RATE2) +
 						(totalWatchPrice - WATCH_REFERRAL_LIMIT2)
 							* (1.0 - WATCH_REFERRAL_RATE3);
 			}
@@ -220,14 +220,15 @@ public class TotalDeposit {
 		for (ProductType productType:ProductType.values()){
 			//calculate the total price in this category
 			for (OrderItem orderItem:order.getOrderItems()){
+			    //???
+                if (orderItem.getProductType() == ProductType.FURNITUREDECOR)
+                    return false;
 				if (orderItem.getProductType() == productType){
 					totalPriceInType += orderItem.getTotalPrice();
 				}
 			}
 			
 			//check the eligibility conditions
-			if (productType == ProductType.FURNITUREDECOR)
-				return false;
 
 			if (productType == ProductType.BOOKS){
 				if (totalPriceInType >= FREE_SHIPPING_BOOK_LIMIT){
