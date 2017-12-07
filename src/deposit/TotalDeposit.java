@@ -116,7 +116,7 @@ public class TotalDeposit {
 					if (jewelrySalesApplicable && 
 							orderItem.getProductType() == ProductType.JEWELRY){
 							totalDeposit += orderItem.getTotalPrice() *
-									(JEWELRY_SALES_RATE - getReferralFeeRate(ProductType.JEWELRY));
+									(JEWELRY_SALES_RATE *(1- getReferralFeeRate(ProductType.JEWELRY)));
 					}
 					else{
 						totalDeposit += orderItem.getTotalPrice() *
@@ -265,7 +265,7 @@ public class TotalDeposit {
 			for (OrderItem orderItem:order.getOrderItems()){
 				if (orderItem.getProductType() == ProductType.JEWELRY){
 					totalJewelryPrice += orderItem.getTotalPrice();
-					jewelryCount = orderItem.getQuantity();
+					jewelryCount += orderItem.getQuantity();
 				}
 			}
 			
