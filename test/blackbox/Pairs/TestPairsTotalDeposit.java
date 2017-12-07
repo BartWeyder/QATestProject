@@ -1,4 +1,4 @@
-/**
+package blackbox.Pairs; /**
  * Created by Eugenij Kizim on 04-Dec-17.
  */
 import static org.junit.Assert.*;
