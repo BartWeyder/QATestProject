@@ -263,7 +263,7 @@ public class TestStatementsTotalDeposit {
         order.setDate(calendar.getTime());
         double totalDeposit = new TotalDeposit(order).getTotalDeposit();
         System.out.println(totalDeposit);
-        assertTrue(Math.abs(totalDeposit - 552.06) < 1e-2);
+        assertTrue(Math.abs(totalDeposit - 12951.86) < 1e-2);
     }
     @Test
     public void test_29() {
