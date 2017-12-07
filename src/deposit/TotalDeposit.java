@@ -367,8 +367,6 @@ public class TotalDeposit {
 	
 	private double getReferralFeeMinimum(ProductType productType){
 		switch (productType){
-			case BOOKS:
-				return 0.00;
 			case CLOTHING:
 				return 1.00;
 			case ELECTRONICS:
@@ -377,10 +375,6 @@ public class TotalDeposit {
 				return 1.00;
 			case JEWELRY:
 				return 2.00;
-			case MUSIC:
-				return 0.00;
-			case VIDEO:
-				return 0.00;
 			case WATCHES:
 				return 2.00;
 			default:
