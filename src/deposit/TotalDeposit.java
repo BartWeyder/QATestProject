@@ -116,7 +116,7 @@ public class TotalDeposit {
 					if (jewelrySalesApplicable && 
 							orderItem.getProductType() == ProductType.JEWELRY){
 							totalDeposit += orderItem.getTotalPrice() *
-									(JEWELRY_SALES_RATE *(1- getReferralFeeRate(ProductType.JEWELRY)));
+									(JEWELRY_SALES_RATE *(1 - getReferralFeeRate(ProductType.JEWELRY)));
 					}
 					else{
 						totalDeposit += orderItem.getTotalPrice() *
