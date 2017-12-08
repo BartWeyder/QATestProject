@@ -1,8 +1,9 @@
-package whitebox.Decisions;
+package Mutant;
 
 /**
- * Created by Eugenij Kizim on 07-Dec-17.
+ * Created by Eugenij Kizim on 08-Dec-17.
  */
+
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
@@ -16,7 +17,7 @@ import org.junit.Test;
 
 import deposit.TotalDeposit;
 
-public class TestDecisionsTotalDeposit {
+public class TestMutantExtended {
     private static final Calendar calendar = Calendar.getInstance();
 
     @Test
@@ -546,5 +547,17 @@ public class TestDecisionsTotalDeposit {
         System.out.println(totalDeposit);
         assertTrue(Math.abs(totalDeposit - 20.18) < 1e-2);
     }
+    @Test
+    public  void test_667() {
+        calendar.set(2018, 0, 1);
+        Order order = new Order();
+        order.setShipment(ShipmentType.DOMESTIC_EXPEDITED);
+        order.addOrderItem(new OrderItem(ProductType.JEWELRY, 1, 49, false));
+        order.setDate(calendar.getTime());
+        double totalDeposit = new TotalDeposit(order).getTotalDeposit();
+        System.out.println(totalDeposit);
+        assertTrue(Math.abs(totalDeposit - 37.56) < 1e-2);
+    }
 
 }
+
