@@ -41,7 +41,6 @@ public class TotalDeposit {
 	
 	//limits for free shipping
 	private final double FREE_SHIPPING_BOOK_LIMIT = 25.0;
-	private final double FREE_SHIPPING_ELECTRONICS_LIMIT = 99.0;
 	private final double FREE_SHIPPING_LIMIT = 49.0;
 	
 	//some constants for jewelry sales
@@ -52,16 +51,16 @@ public class TotalDeposit {
 		this.order = new Order(order);
 		
 		//set dates
-		calendar.set(2017, 12, 16);
+		calendar.set(2017, Calendar.DECEMBER, 16);
 		jewelrySalesStartDate = calendar.getTime();
 		
-		calendar.set(2018, 3, 30);
+		calendar.set(2018, Calendar.MARCH, 30);
 		jewelrySalesEndDate = calendar.getTime();
 		
-		calendar.set(2018, 1, 16);
+		calendar.set(2018, Calendar.JANUARY, 16);
 		watchReferralStartDate = calendar.getTime();
 		
-		calendar.set(2018, 9, 30);
+		calendar.set(2018, Calendar.SEPTEMBER, 30);
 		watchReferralEndDate = calendar.getTime();
 	}
 	
@@ -117,7 +116,7 @@ public class TotalDeposit {
 					if (jewelrySalesApplicable && 
 							orderItem.getProductType() == ProductType.JEWELRY){
 							totalDeposit += orderItem.getTotalPrice() *
-									(JEWELRY_SALES_RATE - getReferralFeeRate(ProductType.JEWELRY));
+									(JEWELRY_SALES_RATE *(1 - getReferralFeeRate(ProductType.JEWELRY)));
 					}
 					else{
 						totalDeposit += orderItem.getTotalPrice() *
@@ -159,7 +158,7 @@ public class TotalDeposit {
 							order.getShipmentType());
 			
 			//subtract per-item fee
-			if (orderItem.getPrice() >= PER_ITEM_FEE){
+			if (orderItem.getPrice() >= PER_ITEM_FEE + 0.01){
 				totalDeposit -= orderItem.getQuantity() * PER_ITEM_FEE;
 			}
 		}
@@ -193,9 +192,9 @@ public class TotalDeposit {
 			else{
 				totalDeposit +=
 						WATCH_REFERRAL_LIMIT1
-							* (1.0 - WATCH_REFERRAL_RATE2) +
-						(totalWatchPrice - WATCH_REFERRAL_LIMIT1)
 							* (1.0 - WATCH_REFERRAL_RATE1) +
+						(WATCH_REFERRAL_LIMIT2 - WATCH_REFERRAL_LIMIT1)
+							* (1.0 - WATCH_REFERRAL_RATE2) +
 						(totalWatchPrice - WATCH_REFERRAL_LIMIT2)
 							* (1.0 - WATCH_REFERRAL_RATE3);
 			}
@@ -213,23 +212,26 @@ public class TotalDeposit {
 	 */
 	private boolean isEligibleForFreeShipping(){
 		double totalPriceInType = 0.0;
-		
+
+		if (order.getShipmentType() == ShipmentType.INTERNATIONAL
+				|| order.getShipmentType() == ShipmentType.INTERNATIONAL_EXPEDITED)
+			return false;
+
 		for (ProductType productType:ProductType.values()){
 			//calculate the total price in this category
 			for (OrderItem orderItem:order.getOrderItems()){
+			    //???
+                if (orderItem.getProductType() == ProductType.FURNITUREDECOR)
+                    return false;
 				if (orderItem.getProductType() == productType){
 					totalPriceInType += orderItem.getTotalPrice();
 				}
 			}
 			
 			//check the eligibility conditions
+
 			if (productType == ProductType.BOOKS){
-				if (totalPriceInType > FREE_SHIPPING_BOOK_LIMIT){
-					return true;
-				}
-			}
-			else if (productType == ProductType.ELECTRONICS){
-				if (totalPriceInType > FREE_SHIPPING_ELECTRONICS_LIMIT){
+				if (totalPriceInType >= FREE_SHIPPING_BOOK_LIMIT){
 					return true;
 				}
 			}
@@ -263,7 +265,7 @@ public class TotalDeposit {
 			for (OrderItem orderItem:order.getOrderItems()){
 				if (orderItem.getProductType() == ProductType.JEWELRY){
 					totalJewelryPrice += orderItem.getTotalPrice();
-					jewelryCount++;
+					jewelryCount += orderItem.getQuantity();
 				}
 			}
 			
@@ -293,32 +295,7 @@ public class TotalDeposit {
 					default:
 						return 0.00;	
 				}
-			case CLOTHING:
-				switch (order.getShipmentType()){
-					case DOMESTIC:
-						return 3.99;
-					case DOMESTIC_EXPEDITED:
-						return 6.99;
-					case INTERNATIONAL:
-						return 16.95;
-					case INTERNATIONAL_EXPEDITED:
-						return 46.50;
-					default:
-						return 0.00;
-				}
 			case MUSIC:
-				switch (order.getShipmentType()){
-					case DOMESTIC:
-						return 3.99;
-					case DOMESTIC_EXPEDITED:
-						return 6.99;
-					case INTERNATIONAL:
-						return 14.95;
-					case INTERNATIONAL_EXPEDITED:
-						return 46.50;
-					default:
-						return 0.00;
-				}
 			case VIDEO:
 				switch (order.getShipmentType()){
 					case DOMESTIC:
@@ -353,7 +330,7 @@ public class TotalDeposit {
 			case CLOTHING:
 				return 6.99;
 			case ELECTRONICS:
-				return 10.99;
+				return 11.99;
 			case FURNITUREDECOR:
 				return 24.99;
 			case JEWELRY:
@@ -390,8 +367,6 @@ public class TotalDeposit {
 	
 	private double getReferralFeeMinimum(ProductType productType){
 		switch (productType){
-			case BOOKS:
-				return 0.00;
 			case CLOTHING:
 				return 1.00;
 			case ELECTRONICS:
@@ -400,10 +375,6 @@ public class TotalDeposit {
 				return 1.00;
 			case JEWELRY:
 				return 2.00;
-			case MUSIC:
-				return 0.00;
-			case VIDEO:
-				return 0.00;
 			case WATCHES:
 				return 2.00;
 			default:
@@ -418,6 +389,8 @@ public class TotalDeposit {
 				return 1.35;
 			case VIDEO:
 				return 1.35;
+			case MUSIC:
+				return 0;
 			default:
 				switch (shipmentType){
 					case DOMESTIC:
